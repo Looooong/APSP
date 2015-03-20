@@ -1,0 +1,144 @@
+
+ <!-- Begin of #container -->
+  <div id="container">
+  	<!-- Begin of #header -->
+    <div id="header-surround"><header id="header">
+    	
+   
+		<!-- Begin of #user-info -->
+		
+    </header></div> <!--! end of #header -->
+    
+    <div class="fix-shadow-bottom-height"></div>
+	
+	<!-- Begin of Sidebar -->
+    <aside id="sidebar">
+    	
+    	<!-- Search -->
+    	<div id="search-bar">
+			<form id="search-form" name="search-form" action="search.php" method="post">
+				<input type="text" id="query" name="query" value="" autocomplete="off" placeholder="Search">
+			</form>
+		</div> <!--! end of #search-bar -->
+		
+		<!-- Begin of #login-details -->
+		<section id="login-details">
+    		<img style="width:220px" class="img-left framed" src="images/logo.png" alt="Hello Admin">
+    		
+    		<div class="clearfix"></div>
+  		</section> 
+    	
+    	<!-- Begin of Navigation -->
+    	<nav id="nav">
+	    	<?php include "server"?>
+	<?php include "menu_tonghop1.php";?>
+</nav> <!--! end of #nav -->
+    	
+    </aside> <!--! end of #sidebar -->
+  <style type="text/css">
+  	.display:none
+	.hover:hover ul{ display:block} 
+	.header { width:980px; }
+	.content { float:left; }
+	.footer { min-height:150px; float:left; clear:both}
+  </style>  
+    <!-- Begin of #main -->
+    <div id="main" role="main">
+    	<!-- Begin of titlebar/breadcrumbs -->
+        <div id ="tile-gog">
+<p class="hover">hover</p>
+            <ul class="display">
+            	<li>
+                	<a href=""><p>trang chủ</p></a>
+                </li>
+                <li>
+                	<a href=""><p>bảng diển khiên</p></a>
+                </li>
+            </ul>
+        </div>
+        <div style="width:980px; margin:0 auto">
+        	<div class="header">
+            	
+            </div>
+            <div class="content">
+            
+            </div>
+            <div class="footer">
+            	
+            </div>
+        </div>
+		<div id="title-bar">
+			<ul id="breadcrumbs">
+				<li><a href="dashboard.html" title="Home"><span id="bc-home"></span></a></li>
+				<li class="no-hover">Bảng Điều Khiển</li>
+			</ul>
+		</div> <!--! end of #title-bar -->
+		
+		<div class="shadow-bottom shadow-titlebar"></div>
+		
+		<!-- Begin of #main-content -->
+		<div id="main-content">
+           
+            <div class="container_12">
+			
+             <?php
+			 if (isset($_GET['options'])) require_once "controllers/maincontrol.php";			
+			 ?>
+             <? include "nhap_suatban.php";?>
+			</div>
+                
+        </div> <!--! end of #main-content -->
+
+  </div> <!--! end of #main -->
+    
+   
+  </div> <!--! end of #container -->
+
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+
+
+
+  <!-- scripts concatenated and minified via ant build script-->
+ 
+  
+  <script type="text/javascript">
+	$().ready(function() {
+		
+		/*
+		 * Form Validation
+		 */
+		$.validator.setDefaults({
+			submitHandler: function(e) {
+				$.jGrowl("Form was successfully submitted.", { theme: 'success' });
+				$(e).parent().parent().fadeOut();
+				v.resetForm();
+				v2.resetForm();
+				v3.resetForm();
+			}
+		});
+		
+		var v = $("#create-user-form").validate();
+		jQuery("#reset").click(function() { v.resetForm(); $.jGrowl("User was not created!", { theme: 'error' }); });
+		
+		var v2 = $("#write-message-form").validate();
+		jQuery("#reset2").click(function() { v2.resetForm(); $.jGrowl("Message was not sent.", { theme: 'error' }); });
+		
+		var v3 = $("#create-folder-form").validate();
+		jQuery("#reset3").click(function() { v3.resetForm(); $.jGrowl("Folder was not created!", { theme: 'error' }); });
+		
+		var validateform = $("#validate-form").validate();
+		$("#reset-validate-form").click(function() {
+			validateform.resetForm();
+			$.jGrowl("You resetted the form.", { theme: 'error' });
+		});
+		
+		/*
+		 * Datepicker
+		 */
+		$( "#datepicker" ).datepicker();		
+	});
+  </script>

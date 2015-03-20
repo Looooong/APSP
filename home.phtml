@@ -1,0 +1,128 @@
+<link rel="stylesheet" href="css/1.css" id="stylesheet">
+<link rel="stylesheet" href="css/960.fluid.css"> <!-- 960.gs Grid System -->
+<link rel="stylesheet" href="css/main.css"> <!-- Complete Layout and main styles -->
+<link rel="stylesheet" href="css/buttons.css"> <!-- Buttons, optional -->
+<link rel="stylesheet" href="css/lists.css"> <!-- Lists, optional -->
+<link rel="stylesheet" href="css/icons.css"> <!-- Icons, optional -->
+<link rel="stylesheet" href="css/notifications.css"> <!-- Notifications, optional -->
+<link rel="stylesheet" href="css/typography.css"> <!-- Typography -->
+<link rel="stylesheet" href="css/forms.css"> <!-- Forms, optional -->
+<link rel="stylesheet" href="css/tables.css"> <!-- Tables, optional -->
+<link rel="stylesheet" href="css/jquery-ui-1.8.15.custom.css"> <!-- jQuery UI, optional -->
+<link href="//fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/styleformnhap.css" type="text/css" media="screen"/>
+<link href="css/style.css" rel="stylesheet" type="text/css" />   
+<script src="js/jquery.js"></script>
+<script src="js/libs/modernizr-2.0.6.min.js"></script>
+<script defer src="js/plugins.js"></script> <!-- lightweight wrapper for consolelog, optional -->
+<script defer src="js/mylibs/jquery-ui-1.8.15.custom.min.js"></script> <!-- jQuery UI -->
+<script defer src="js/mylibs/jquery.notifications.js"></script> <!-- Notifications  -->
+<script defer src="js/mylibs/jquery.uniform.min.js"></script> <!-- Uniform (Look & Feel from forms) -->
+<script defer src="js/mylibs/jquery.validate.min.js"></script> <!-- Validation from forms -->
+<script defer src="js/mylibs/jquery.dataTables.min.js"></script> <!-- Tables -->
+<script defer src="js/mylibs/jquery.tipsy.js"></script> <!-- Tooltips -->
+<script defer src="js/mylibs/jquery.slidernav.min.js"></script> <!-- Contact List -->
+<script defer src="js/common.js"></script> <!-- Generic functions -->
+<script defer src="js/script.js"></script> <!-- Generic scripts -->
+<script type="text/javascript" src="js/sliding.form.js"></script>
+	<!-- Begin of #container -->
+	<div id="container">
+		
+        <!-- Begin of #header -->
+		<div id="header-surround"><header id="header">
+			
+            <!-- Begin of #user-info -->
+			<div id="user-info">
+				<p>
+					<span class="messages">chào<a href="javascript:void(0);">quản trị viên</a></span>
+					<a href="index.php?options=logout" class="button red">thoát</a>
+				</p>
+			</div> <!--! end of #user-info -->
+            
+			<div id="user-info">
+				<p>
+					<a href="#"><img title="Tiếng Việt" src="scr/img/bg/vi.png" alt="" border="0" /></a>
+					<a href="#"><img title="English" src="scr/img/bg/en.jpg" alt="" border="0" /></a>
+				</p>
+			</div> <!--! end of #user-info -->
+		</header></div> <!--! end of #header -->
+
+		<div class="fix-shadow-bottom-height"></div>
+
+		<!-- Begin of Sidebar -->
+		<aside id="sidebar">
+			
+            <!-- Search -->
+			<div id="search-bar">
+				<form id="search-form" name="search-form" action="search.php" method="post">
+					<input type="text" id="query" name="query" value="" autocomplete="off" placeholder="tìm kiếm">
+				</form>
+			</div> <!--! end of #search-bar -->
+			
+            <!-- Begin of #login-details -->
+			<section id="login-details">
+				<a href="index.php"><img style="width:220px" class="img-left framed" src="scr/img/bg/logo.png" alt=""></a>
+                <div class="clearfix"></div>
+			</section> 
+
+			<!-- Begin of Navigation -->
+			<nav id="nav">
+		 <?php //include "detail/menu.php"?>
+				<?php //include "menu_tonghop1.php";?>
+			</nav> <!--! end of #nav -->
+		</aside> <!--! end of #sidebar -->
+
+		<!-- Begin of #main -->
+		<div id="main" role="main">
+			
+            <!-- Begin of titlebar/breadcrumbs -->
+			<div id="title-bar">
+				<ul id="breadcrumbs">
+					<li><a href="index.php" title="Home"><span id="bc-home"></span></a></li>
+					
+                    <li class="no-hover">Bảng Điều Khiển</li>
+				</ul>
+			</div> <!--! end of #title-bar -->
+
+			<div class="shadow-bottom shadow-titlebar"></div>
+
+			<!-- Begin of #main-content -->
+			<div id="main-content">
+          		<div class="container_12">
+					
+				</div>
+       		</div> <!--! end of #main-content -->
+		</div> <!--! end of #main -->
+	</div> <!--! end of #container -->
+
+
+<script type="text/javascript">
+	$().ready(function() {
+		/*
+		 * Form Validation
+		 */
+		$.validator.setDefaults({
+			submithandler: function(e) {
+				$.jGrowl("Form was successfully submitted.", { theme: 'success' });
+				$(e).parent().parent().fadeOut();
+				v.resetForm();
+				v2.resetForm();
+				v3.resetForm();
+			}
+		});
+		var v = $("#create-user-form").validate();
+		jQuery("#reset").click(function() { v.resetForm(); $.jGrowl("User was not created!", { theme: 'error' }); });
+		
+		var v2 = $("#write-message-form").validate();
+		jQuery("#reset2").click(function() { v2.resetForm(); $.jGrowl("Message was not sent.", { theme: 'error' }); });
+		
+		var v3 = $("#create-folder-form").validate();
+		jQuery("#reset3").click(function() { v3.resetForm(); $.jGrowl("Folder was not created!", { theme: 'error' }); });
+		
+		var validateform = $("#validate-form").validate();
+		$("#reset-validate-form").click(function() {
+			validateform.resetForm();
+			$.jGrowl("You resetted the form.", { theme: 'error' });
+		});
+	});
+  </script>

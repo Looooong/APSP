@@ -1,0 +1,210 @@
+<?php 
+include "inc/database.class.php";
+require_once 'inc/config.php';
+if(isset($_GET['addrowphieu']))
+	{
+		
+		$query = "UPDATE tabletest1 SET company = N'".$_GET['company']."', typect = N'".$_GET['typect']."', goods = N'".$_GET['goods']."'
+		, department = N'".$_GET['department']."', vote = '".$_GET['vote']."', vouchersnumber = '".$_GET['vouchersnumber']."', ngayct = '".$_GET['ngayct']."'
+		, serinumber = '".$_GET['serinumber']."' ,daylp = '".$_GET['daylp']."', inventory = N'".$_GET['inventory']."', typemoney = N'".$_GET['typem']."'
+		, rate = '".$_GET['ratio']."' WHERE maphieuID = '".$_GET['idmaphieu']."'";
+		$db->querySql($query);
+		//echo $query;exit;
+		$id = $_GET['idinfo'];
+		for($i = 0; $i<count($id) ; $i++){
+		$query = "UPDATE tabletest2 SET name = N'".$_GET['name'][$i]."', color = N'".$_GET['color'][$i]."', size = N'".$_GET['size'][$i]."'
+		, quantity = '".$_GET['quantity'][$i]."', unit = N'".$_GET['unit'][$i]."', discount = '".$_GET['discount'][$i]."', money = '".$_GET['money'][$i]."'
+		, total = '".$_GET['total'][$i]."' ,promotion = N'".$_GET['promotion'][$i]."',
+		interpretation = N'".$_GET['interpretation'][$i]."', vat = '".$_GET['vat'][$i]."', notes = N'".$_GET['notes'][$i]."' WHERE infoID = '".$id[$i]."'";
+		$db->querySql($query);
+		echo $query;exit;
+		}
+		
+	}
+	
+	$query = "SELECT * FROM tabletest1 WHERE maphieuID = '8'";
+	$db->querySql($query);
+	//echo $query;exit;
+	if($db->numrows()> 0){
+		$array = $db->fetchArray();
+	}
+else{
+	Die('Thieu thong tin');	
+}
+?>
+<style type="text/css">
+#TB_ajaxContent { width:1100px !important; height:400px !important;}
+.td_line{ line-height:20px; width:60px; text-align:center}
+	}
+
+</style>
+<form id="formajax" action="javascript:fedit();">
+<div class="block-border">
+	<div class="block-header">
+		<h1>EDIT VOTE</h1><span></span>
+	</div>
+	<div class="block-content">
+    	<!--<form id="formajax" action="javascript:fedit();" method = "POST">-->
+        <table style="font-weight:normal; font-size:12px; width:100%"  border="1" cellpadding="0">
+  <tr>
+   <input type="hidden" name="idmaphieu" value="<?php echo $array['maphieuID'];?>"  />
+    <td class="td_line"><label for="title">COMPANY:</label></td>
+    <td><input name="company" type="text" id = "company" value = "<?php echo $array['company']; ?>" /></td>
+    
+    <td class="td_line"><label for="title">TYPE:</label></td>
+    <td><input name="typect" type="text" id = "typect" value = "<?php echo $array['typect']; ?>" /></td>
+    
+    <td  class="td_line"><label for="title">GOODS:</label></td>
+    <td><input name="goods" type="text" id = "goods"  value = "<?php echo $array['goods']; ?>" /></td>
+    
+    <td class="td_line"><label for="title">DEPARTMENT:</label></td>
+    <td><input name="department" type="text" id = "department"  value = "<?php echo $array['department']; ?>" /></td>
+    
+    <td class="td_line"><label for="title">VOTE:</label></td>
+    <td><input name="vote" type="text" id = "vote"  value = "<?php echo $array['vote']; ?>" /></td>
+     
+  </tr>
+  
+  
+   <tr>
+    <td class="td_line"><label for="title">VOUCHERSNUMBER:</label></td>
+    <td><input name="vouchersnumber" type="text" id = "vouchersnumber"  value = "<?php echo $array['vouchersnumber']; ?>" /></td>
+    
+    <td class="td_line"><label for="title">VOUCHERSDAY:</label></td>
+    <td><input name="ngayct" type="text" id = "ngayct" value = "<?php  echo date_format($array['ngayct'],"Y-m-d");?>" /></td>
+    
+    <td  class="td_line"><label for="title">SERINUMBER:</label></td>
+    <td><input name="serinumber" type="text" id = "serinumber"  value = "<?php echo $array['serinumber']; ?>" /></td>
+    
+    
+    
+    <td class="td_line"><label for="title">DAYIN:</label></td>
+    <td><input name="daylp" type="text" id = "daylp" value = "<?php  echo date_format($array['daylp'],"Y-m-d");?>" /></td>
+    
+    <td class="td_line"><label for="title">INVENTORY:</label></td>
+    <td><input name="inventory" type="text" id = "inventory"  value = "<?php echo $array['inventory']; ?>" /></td>
+    
+ 
+    
+   
+  </tr>
+  
+  
+   <tr>
+    <td class="td_line"><label for="title">CURRENCY:</label></td>
+    <td><input name="typem" type="typem" id = "typem"  value = "<?php echo $array['typemoney']; ?>" /></td>
+    
+    <td class="td_line"><label for="title">RATIO:</label></td>
+    <td><input name="ratio" type="text" id = "ratio" value = "<?php echo $array['rate']; ?>" /></td>
+    
+   
+  </tr>
+  
+  
+</table>
+     <div  style="overflow:auto; height:250px; width:100%;margin-top:5px">
+
+
+			<table style="font-size:12PX" id="table-example" class="table" >
+   				<thead>
+					<tr style="font-size:12px">
+						<th>NAME</th>
+						<th>COLOR</th>
+                        <th>SIZE</th>
+						<th>QUANTITY</th>
+                        <th>UNIT</th>
+                       <th>DISCOUNT</th>
+					   <th>MONEY</th>
+                       <th>TOTAL</th> 
+                        <th>PROMOTION</th>
+						<th>VAT</th>
+                        <th>INTERPRETATION</th>
+                   		<th>NOTES</th>
+                        
+                    </tr>
+					<?php 
+					$query = "SELECT * FROM tabletest2 WHERE maphieuID = '8'";
+
+					$db->querySql($query);
+					$arraylist = $db->fetchToArray();
+					
+					foreach($arraylist as $rowtb2){
+					echo '
+                    <tr style="font-size:12px;">
+						<th><input type="hidden" name = "idinfo[]" id = "idinfo" value = "'.$rowtb2['infoID'].'" /></th>
+						<th><input type="text" name = "name[]" id = "name" value = "'.$rowtb2['name'].'" /></th>
+                        <th><input type="text" name = "color[]" id = "color" value = "'.$rowtb2['color'].'" /></th>
+                        <th><input type="text" name = "size[]" id = "size" value = "'.$rowtb2['size'].'" /></th>
+                        <th><input type="text" name = "quantity[]" id = "quantity"  value = "'.$rowtb2['quantity'].'" /></th>
+                        <th><input type="text" name = "unit[]" id = "unit" value = "'.$rowtb2['unit'].'" /></th>
+                        <th><input type="text" name = "discount[]" id = "discount" value = "'.$rowtb2['discount'].'" /></th>
+                        <th><input type="text" name = "money[]" id = "money"  value = "'.$rowtb2['money'].'" /></th>
+                        <th><input type="text" name = "total[]" id = "total" value = "'.$rowtb2['total'].'" /></th>
+                        <th><input type="text" name = "promotion[]" id = "promotion" value = "'.$rowtb2['promotion'].'" /></th>
+                        <th><input type="text" name = "vat[]" id = "vat" value = "'.$rowtb2['vat'].'" /></th>
+                        <th><input type="text" name = "interpretation[]" id = "interpretation" value = "'.$rowtb2['interpretation'].'" /></th>
+                        <th><input type="text" name = "notes[]" id = "notes" value = "'.$rowtb2['notes'].'" /></th>
+					</tr>';
+                     }
+					 ?>
+                   
+				</thead>
+				
+			</table>
+            
+          </div>
+            <div class="block-actions">
+            <ul class="actions-left">
+					<li><input type="submit" name = "editphieu" class="button" value="EDIT"></li>
+			  </ul>
+				<ul class="actions-right">
+                	<li id="loaderLanguage"></li>
+					 <li><input type="button" name="submit" class="button" value="in" onClick="printContent('txtHint');" /></li>
+                    <li><input type="button" id="clickExcel2" name="submit" class="button" value="xuất"  /></li>
+				</ul>
+			</div>
+		
+	</div>
+</div>
+</form>
+<script>
+	function fedit(){
+		$.ajax({
+			type: "GET",
+			url: "Function.php?mod=editphieu",
+			data:{
+				company:$("#company").val(),
+				typect:$("#typect").val(),
+				goods:$("#goods").val(),
+				department:$("#department").val(),
+				vouchersnumber:$("#vouchersnumber").val(),
+				vote:$("#vote").val(),
+				ngayct:$("#ngayct").val(),
+				serinumber:$("#serinumber").val(),
+				daylp:$("#daylp").val(),
+				inventory:$("#inventory").val(),
+				typem:$("#typem").val(),
+				ratio:$("#ratio").val(),
+				name:$("#name").val(),
+				color:$("#color").val(),
+				size:$("#size").val(),
+				quantity:$("#quantity").val(),
+				unit:$("#unit").val(),
+				discount:$("#discount").val(),
+				money:$("#money").val(),
+				total:$("#total").val(),
+				promotion:$("#promotion").val(),
+				vat:$("#vat").val(),
+				interpretation:$("#interpretation").val(),
+				notes:$("#notes").val(),
+				idmaphieu:<?php echo $array['maphieuID'];?>
+				idinfo:<?php echo $array['infoID'];?>
+			},
+			success: function(msgD){
+				alert(msgD);
+				window.location.reload();
+			}
+		});
+	}
+	
+</script>
